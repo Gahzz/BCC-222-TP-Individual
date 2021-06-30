@@ -1,11 +1,12 @@
 #include <iostream>
 #include <string>
 #include <assert.h>
+#include <cmath>
 #include "funcional_tests.h"
 
 #include "../../src/lib/model.h"
 #include "../../src/lib/system.h"
-#include "../../src/lib/flow.h"
+//#include "../../src/lib/flow.h"
 
 using namespace std;
 
@@ -24,7 +25,7 @@ public:
 
 	}
 
-	double execute()
+	float execute()
 	{
 		return 0.01 * (targetSystem->getValue()) * (1 - (targetSystem->getValue()) / 70);
 	}
@@ -45,7 +46,7 @@ public:
 
 	}
 
-	double execute()
+	float execute()
 	{
 		return 0.01 * (sourceSystem->getValue());
 	}
@@ -69,8 +70,8 @@ void exponencialFuncionalTest()
 
 	m1->execute(0, 100);
 
-	assert(pop1->getValue() < 37.3 && pop1->getValue() > 35.2);
-	assert(pop2->getValue() < 64.8 && pop2->getValue() > 62.7);
+	assert(fabs(pop1->getValue() - 36.6032) < 0.0001);
+	assert(fabs(pop2->getValue() - 63.3968) < 0.0001);
 
 	delete m1;
 }
@@ -89,8 +90,8 @@ void logisticalFuncionalTest()
 	m2->add(logistica);
 	m2->execute(0, 100);
 
-	assert(p1->getValue() < 89.1 && p1->getValue() > 87);
-	assert(p2->getValue() < 23 && p2->getValue() > 20.9);
+	assert(fabs(p1->getValue() - 88.2167) < 0.0001);
+	assert(fabs(p2->getValue() - 21.7833) < 0.0001);
 	
 	delete m2;
 }
@@ -124,14 +125,11 @@ void complexFuncionalTest()
 	m3->add(r);
 	m3->execute(0, 100);
 
-	
-
-	assert(q1->getValue() < 32.8 && q1->getValue() > 30.7);
-	assert(q2->getValue() < 19.4 && q2->getValue() > 17.3);
-	assert(q3->getValue() < 77.9 && q3->getValue() > 75.8);
-	assert(q4->getValue() < 57.4 && q4->getValue() > 55.3);
-	assert(q5->getValue() < 17.7 && q5->getValue() > 15.8);
-
+	assert(fabs(q1->getValue() - 31.8513) < 0.0001);
+	assert(fabs(q2->getValue() - 18.4003) < 0.0001);
+	assert(fabs(q3->getValue() - 77.1143) < 0.0001);
+	assert(fabs(q4->getValue() - 56.1728) < 0.0001);
+	assert(fabs(q5->getValue() - 16.4612) < 0.0001);
 
 	delete m3;
 }

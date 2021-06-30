@@ -1,57 +1,98 @@
 #include "system.h"
 
+/**
+  * \return System
+  */
 System::System()
 {
 	value = 0;
 	name = "";
 }
 
-System::System(string name2, double value2)
+/**
+  * \param valueSystem is the current amount or energy
+  * \param nameSystem is the name of the system
+  * \return System
+  */
+System::System(string nameSystem, float valueSystem)
 {
-	value = value2;
-	name = name2;
+	value = valueSystem;
+	name = nameSystem;
 }
 
+/**
+  * \param system is a System, and the new one gonna be a copy of it
+  * \return System
+  */
 System::System(System* system)
 {
 	value = system->value;
 	name = system->name;
 }
 
+/**
+  * \return
+  */
 System::~System()
 {
 }
 
-void System::setValue(double quantity)
+/**
+  * \param quantity is the new system value
+  * \return void
+  */
+void System::setValue(float quantity)
 {
 	value = quantity;
 }
 
+/**
+  * \param id is the new name of the system
+  * \return void
+  */
 void System::setName(string id)
 {
 	name = id;
 }
 
+/**
+  * \return double
+  */
 double System::getValue()
 {
 	return value;
 }
 
+/**
+  * \return string
+  */
 string System::getName()
 {
 	return name;
 }
 
-void System::increaseQuantity(double value2)
+/** \param valueSytem is the quantity that gonna be add to the System quantity
+  * \return void
+  *
+  **/
+void System::increaseQuantity(float valueSystem)
 {
-	value += value2;
+	value += valueSystem;
 }
 
-void System::decreaseQuantity(double value2)
+/** \param valueSystem is the quantity that gonna be remove to the System quantity
+  * \return void
+  *
+  **/
+void System::decreaseQuantity(float valueSystem)
 {
-	value -= value2;
+	value -= valueSystem;
 }
 
+/**
+  * \param system is the System that gonna be copied
+  * \return System&
+  */
 System& System::operator= (const System& system)
 {
 	if (this == &system)
@@ -63,6 +104,10 @@ System& System::operator= (const System& system)
 	return *this;
 }
 
+/**
+  * \param system is the System that gonna be compared with the System that call this function
+  * \return bool
+  */
 bool System::operator== (const System& system)
 {
 	if (name == system.name && value == system.value)

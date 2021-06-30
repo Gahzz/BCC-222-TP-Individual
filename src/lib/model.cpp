@@ -1,48 +1,77 @@
 #include "model.h"
 
+/**
+  * \return Model
+  */
 Model::Model()
 {
 	name = "";
 }
 
-Model::Model(string name2)
+/**
+  * \param nameModel is the name of the Model
+  * \return Model
+  */
+Model::Model(string nameModel)
 {
-	name = name2;
+	name = nameModel;
 }
 
+/**
+  * \param model is a Model, and the new one gonna be a copy of it
+  * \return Model
+  */
 Model::Model(Model* model)
 {
 	flows = model->flows;
 	systems = model->systems;
 }
 
+/**
+  * \return 
+  */
 Model::~Model()
 {
 }
 
+/**
+  * \return string
+  */
 string Model::getName()
 {
 	return name;
 }
 
-void Model::setName(string name2)
+/**
+  *\param nameModel is s the name of the Model
+  * \return void
+  */
+void Model::setName(string nameModel)
 {
-	name = name2;
+	name = nameModel;
 }
 
-
+/** \param flow is the Flow that gonna be added to the Model
+  * \return bool
+  **/
 bool Model::add(Flow* flow)
 {
 	flows.push_back(flow);
 	return true;
 }
 
+/** \param system is the System that gonna be added to the Model
+  * \return bool
+  **/
 bool Model::add(System* system)
 {
 	systems.push_back(system);
 	return true;
 }
 
+/** \param flow is the Flow that gonna be removed from Model
+  * \return bool
+  **/
 bool Model::remove(Flow* flow)
 {
 	int size = flows.size();
@@ -56,9 +85,12 @@ bool Model::remove(Flow* flow)
 		}
 	}
 
-	return false; // the flow didn't exist
+	return false; // the Flow doesn't exist
 }
 
+/** \param system is the System that gonna be removed from Model
+  * \return bool
+  **/
 bool Model::remove(System* system)
 {
 	int size = systems.size();
@@ -72,14 +104,20 @@ bool Model::remove(System* system)
 		}
 	}
 
-	return false; // the system didn't exist 
+	return false; // the System doesn't exist
 }
 
+
+/** \param begin is the begin of the simualtion
+  * \param end is the end of the simulation
+  * \return void
+  *
+  **/
 void Model::execute(int begin, int end)
 {
 	
 	int size = this->flows.size(); // get a vector size
-	double* v = new double[size]; // alocate a float vector
+	float *v = new float[size]; // alocate a float vector
 
 	for (int i = begin; i < end; i++)
 	{
@@ -101,8 +139,14 @@ void Model::execute(int begin, int end)
 		}
 	}
 
+	delete [] v;
+
 }
 
+/**
+  * \param model is a Model that gonna be copied
+  * \return Model&
+  */
 Model& Model::operator= (const Model& model)
 {
 	if (this == &model)
@@ -135,6 +179,10 @@ Model& Model::operator= (const Model& model)
 	return *this;
 }
 
+/**
+  * \param model is a Model that gonna be compared with the Model that call this function
+  * \return bool
+  */
 bool Model::operator== (const Model& model)
 {
 	if (this == &model)

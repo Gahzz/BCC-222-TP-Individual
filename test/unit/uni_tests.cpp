@@ -1,4 +1,4 @@
-#include "uni_tests.h"
+/*#include "uni_tests.h"
 #include <iostream>
 #include <string>
 #include <math.h>
@@ -25,7 +25,7 @@ public:
 
 	}
 
-	double execute()
+	float execute()
 	{
 		return targetSystem->getValue() * 2;
 	}
@@ -109,4 +109,4 @@ void modeltest()
 	delete s1;
 	delete f1;
 	delete m1;
-}
+}*/
