@@ -6,43 +6,25 @@
 
 using namespace std;
 
+/**interface declaration*/
 class System {
 
-private:
-	/** System name*/ 
-	string name;
-	/**Current value in the system*/ 
-	float value;
-	
-
 public:
-	/** System default constructor */
-	System();
-	/** System constructor */
-	System(string, float);
+	
 	/** System's destructor */
-	virtual ~System();
+	virtual ~System(){};
 	/** Change System value*/
-	void setValue(float);
+	virtual void setValue(float) = 0;
 	/** Change System name*/
-	void setName(string);
+	virtual void setName(string) = 0;
 	/** Get System value */
-	double getValue();
+	virtual double getValue() = 0;
 	/** Get System name */
-	string getName();
+	virtual string getName() = 0;
 	/** Increase System quantity. */
-	void increaseQuantity(float);
+	virtual void increaseQuantity(float) = 0;
 	/**Decreases system quantity*/
-	void decreaseQuantity(float);
-
-private:
-	/** System constructor of copy */
-	System(System* system);
-	/** Operator = overload */
-	System& operator= (const System&);
-	/**  Operator == overload */
-	bool operator== (const System&);
-
+	virtual void decreaseQuantity(float) = 0;
 };
 
 

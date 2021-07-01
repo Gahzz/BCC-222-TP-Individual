@@ -6,44 +6,27 @@
 
 using namespace std;
 
+/**interface declaration*/
 class Flow {
 
-protected:
-	/** Flow's Name */
-	string name;
-	/** The System of origin, that is, which will give the quantity */
-	System* sourceSystem;
-	/** The System that will receive a value, ie, the target System */
-	System* targetSystem;
-
 public:
-	/** Default Flow constructor */
-	Flow();
-	/** Flow constructor */
-	Flow(string, System*, System*);
+	
 	/** Flow destructor */
-	virtual ~Flow();
+	virtual ~Flow(){};
 	/** Change Flow name */
-	void setName(string);
+    virtual void setName(string) = 0;
 	/**Insert a Source system */
-	void setSourceSystem(System*);
+	virtual void setSourceSystem(System*) = 0;
 	/**Insert a Target system */
-	void setTargetSystem(System*);
+	virtual void setTargetSystem(System*) = 0;
 	/** Get Flow name */
-	string getName();
+	virtual string getName() = 0;
 	/** Get Flow source */
-	System* getSourceSystem();
+	virtual System* getSourceSystem() = 0;
 	/** Get Flow target */
-	System* getTargetSystem();
+	virtual System* getTargetSystem() = 0;
 	/** Define the equation to the Flow */
 	virtual float execute() = 0;
-	
-private:
-	/** operator == overload */
-	bool operator== (const Flow&);
-	/** operator = overload */
-	Flow& operator= (const Flow&);
-	
 
 };
 

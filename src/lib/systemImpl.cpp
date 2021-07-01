@@ -1,9 +1,9 @@
-#include "system.h"
+#include "systemImpl.h"
 
 /**
   * \return System
   */
-System::System()
+SystemImpl::SystemImpl()
 {
 	value = 0;
 	name = "";
@@ -14,7 +14,7 @@ System::System()
   * \param nameSystem is the name of the system
   * \return System
   */
-System::System(string nameSystem, float valueSystem)
+SystemImpl::SystemImpl(string nameSystem, float valueSystem)
 {
 	value = valueSystem;
 	name = nameSystem;
@@ -24,7 +24,7 @@ System::System(string nameSystem, float valueSystem)
   * \param system is a System, and the new one gonna be a copy of it
   * \return System
   */
-System::System(System* system)
+SystemImpl::SystemImpl(SystemImpl* system)
 {
 	value = system->value;
 	name = system->name;
@@ -33,7 +33,7 @@ System::System(System* system)
 /**
   * \return
   */
-System::~System()
+SystemImpl::~SystemImpl()
 {
 }
 
@@ -41,7 +41,7 @@ System::~System()
   * \param quantity is the new system value
   * \return void
   */
-void System::setValue(float quantity)
+void SystemImpl::setValue(float quantity)
 {
 	value = quantity;
 }
@@ -50,7 +50,7 @@ void System::setValue(float quantity)
   * \param id is the new name of the system
   * \return void
   */
-void System::setName(string id)
+void SystemImpl::setName(string id)
 {
 	name = id;
 }
@@ -58,7 +58,7 @@ void System::setName(string id)
 /**
   * \return double
   */
-double System::getValue()
+double SystemImpl::getValue()
 {
 	return value;
 }
@@ -66,7 +66,7 @@ double System::getValue()
 /**
   * \return string
   */
-string System::getName()
+string SystemImpl::getName()
 {
 	return name;
 }
@@ -75,7 +75,7 @@ string System::getName()
   * \return void
   *
   **/
-void System::increaseQuantity(float valueSystem)
+void SystemImpl::increaseQuantity(float valueSystem)
 {
 	value += valueSystem;
 }
@@ -84,7 +84,7 @@ void System::increaseQuantity(float valueSystem)
   * \return void
   *
   **/
-void System::decreaseQuantity(float valueSystem)
+void SystemImpl::decreaseQuantity(float valueSystem)
 {
 	value -= valueSystem;
 }
@@ -93,7 +93,7 @@ void System::decreaseQuantity(float valueSystem)
   * \param system is the System that gonna be copied
   * \return System&
   */
-System& System::operator= (const System& system)
+SystemImpl& SystemImpl::operator= (const SystemImpl& system)
 {
 	if (this == &system)
 		return *this;
@@ -108,7 +108,7 @@ System& System::operator= (const System& system)
   * \param system is the System that gonna be compared with the System that call this function
   * \return bool
   */
-bool System::operator== (const System& system)
+bool SystemImpl::operator== (const SystemImpl& system)
 {
 	if (name == system.name && value == system.value)
 		return true;

@@ -1,13 +1,24 @@
-#include "flow.h"
+#include "flowImpl.h"
 
 /**
   * \return Flow
   */
-Flow::Flow()
+FlowImpl::FlowImpl()
 {
 	sourceSystem = NULL;
 	targetSystem = NULL;
 	name[0] = '\0';
+}
+
+/**
+  * \param flow is the flow to be copied
+  * \return Flow
+  */
+FlowImpl::FlowImpl(FlowImpl* flow)
+{
+	sourceSystem = flow->sourceSystem;
+	targetSystem = flow->targetSystem;
+	name = flow->name;
 }
 
 /**
@@ -16,7 +27,7 @@ Flow::Flow()
   * \param target is the System that gonna recive the energy
   * \return Flow
   */
-Flow::Flow(string id, System* source, System* target)
+FlowImpl::FlowImpl(string id, System* source, System* target)
 {
 	sourceSystem = source;
 	targetSystem = target;
@@ -26,7 +37,7 @@ Flow::Flow(string id, System* source, System* target)
 /**
   * \return
   */
-Flow::~Flow()
+FlowImpl::~FlowImpl()
 {
 }
 
@@ -34,7 +45,7 @@ Flow::~Flow()
   * \param id is the Flow's name
   * \return void
   */
-void Flow::setName(string id)
+void FlowImpl::setName(string id)
 {
 	name = id;
 }
@@ -42,7 +53,7 @@ void Flow::setName(string id)
 /**
   * \return string
   */
-string Flow::getName()
+string FlowImpl::getName()
 {
 	return name;
 }
@@ -50,7 +61,7 @@ string Flow::getName()
 /**
   * \return System*
   */
-System* Flow::getSourceSystem()
+System* FlowImpl::getSourceSystem()
 {
 	return sourceSystem;
 }
@@ -58,7 +69,7 @@ System* Flow::getSourceSystem()
 /**
   * \return System*
   */
-System* Flow::getTargetSystem()
+System* FlowImpl::getTargetSystem()
 {
 	return targetSystem;
 }
@@ -67,7 +78,7 @@ System* Flow::getTargetSystem()
   * \return void
   *
   **/
-void Flow:: setSourceSystem(System* s)
+void FlowImpl:: setSourceSystem(System* s)
 {
 	sourceSystem = s;
 }
@@ -76,7 +87,7 @@ void Flow:: setSourceSystem(System* s)
   * \return void
   *
   **/
-void Flow::setTargetSystem(System* s)
+void FlowImpl::setTargetSystem(System* s)
 {
 	targetSystem = s;
 }
@@ -85,7 +96,7 @@ void Flow::setTargetSystem(System* s)
   * \param flow is a flow that gonna be copied
   * \return Flow&
   */
-Flow& Flow::operator= (const Flow& flow)
+FlowImpl& FlowImpl::operator= (const FlowImpl& flow)
 {
 	if (this == &flow)
 		return *this;
@@ -102,7 +113,7 @@ Flow& Flow::operator= (const Flow& flow)
   * \param flow is a flow that gonna be compared with the Flow that call this function
   * \return bool
   */
-bool Flow::operator== (const Flow& flow)
+bool FlowImpl::operator== (const FlowImpl& flow)
 {
 	if (name == flow.name && sourceSystem == flow.sourceSystem && targetSystem == flow.targetSystem)
 		return true;

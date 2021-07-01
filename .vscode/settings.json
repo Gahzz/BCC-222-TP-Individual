@@ -2,5 +2,32 @@
   "C_Cpp_Runner.cCompilerPath": "C:\\MinGW\\bin\\gcc.exe",
   "C_Cpp_Runner.cppCompilerPath": "C:\\MinGW\\bin\\g++.exe",
   "C_Cpp_Runner.debuggerPath": "C:\\MinGW\\bin\\gdb.exe",
-  "C_Cpp_Runner.makePath": "C:\\MinGW\\bin\\make.exe"
+  "C_Cpp_Runner.makePath": "C:\\MinGW\\bin\\make.exe",
+  "files.associations": {
+    "typeinfo": "cpp",
+    "optional": "cpp",
+    "istream": "cpp",
+    "ostream": "cpp",
+    "system_error": "cpp",
+    "array": "cpp",
+    "functional": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "utility": "cpp",
+    "string": "cpp",
+    "atomic": "cpp",
+    "*.tcc": "cpp",
+    "deque": "cpp",
+    "unordered_map": "cpp",
+    "vector": "cpp",
+    "iterator": "cpp",
+    "memory_resource": "cpp",
+    "string_view": "cpp",
+    "fstream": "cpp",
+    "new": "cpp",
+    "sstream": "cpp",
+    "stdexcept": "cpp",
+    "streambuf": "cpp",
+    "iostream": "cpp"
+  }
 }

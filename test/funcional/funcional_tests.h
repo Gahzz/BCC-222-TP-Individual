@@ -1,10 +1,6 @@
 #ifndef FUNCIONAL_TESTS_H
 #define FUNCIONAL_TESTS_H
 
-
-void exponencialFuncionalTest();
-void logisticalFuncionalTest();
-void complexFuncionalTest();
-
+void runFuncionalTests();
 
 #endif // !FUNCIONAL_TESTS_H

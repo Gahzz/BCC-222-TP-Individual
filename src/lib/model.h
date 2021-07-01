@@ -1,50 +1,32 @@
 #ifndef MODEL_H
 #define MODEL_H
+
 #include <vector>
-#include <string>
-#include <iostream>
 #include <iomanip>
 #include "flow.h"
 
+/**interface declaration*/
 class Model {
 
-protected:
-	/** Model name */
-	string name;
-	/*!< Model flows */ 
-	vector<Flow*> flows;
-	/*!< Model's systems */
-	vector<System*> systems;
-
 public:
-	/** Model default constructor */
-	Model();
-	/** Model constructor */
-	Model(string);
-	/** Model destructor */
-	virtual ~Model();
-	/** Get Model Name */
-	string getName();
+	
+    /** Get Model Name */
+	virtual string getName() = 0;
 	/** Change Model name */
-	void setName(string);
+	virtual void setName(string) = 0;
 	/** Add a Flow to the model */
-	bool add(Flow*);
+	/** Model destructor */
+	virtual ~Model() {};
+	/** Add a Flow to the model */
+	virtual bool add(Flow*) = 0;
 	/** Add a System to the model */
-	bool add(System*);
+	virtual bool add(System*) = 0;
 	/**Remove a Flow from the model */
-	bool remove(Flow*);
+	virtual bool remove(Flow*) = 0;
 	/**Remove a System from the model */
-	bool remove(System*);
+	virtual bool remove(System*) = 0;
 	/**Run the simulation */
-	void execute(int, int);
-
-private:
-	/** Model's constructor of copy*/
-	Model(Model*);
-	/** operator = overload */
-	Model& operator= (const Model&);
-	/** operator == overload */
-	bool operator== (const Model&);
+	virtual void execute(int, int) = 0;
 };
 
 

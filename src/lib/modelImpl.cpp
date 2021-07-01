@@ -1,10 +1,12 @@
-#include "model.h"
+#include "modelImpl.h"
 
 /**
   * \return Model
   */
-Model::Model()
+ModelImpl::ModelImpl()
 {
+	flows.clear();
+	systems.clear();
 	name = "";
 }
 
@@ -12,7 +14,7 @@ Model::Model()
   * \param nameModel is the name of the Model
   * \return Model
   */
-Model::Model(string nameModel)
+ModelImpl::ModelImpl(string nameModel)
 {
 	name = nameModel;
 }
@@ -21,7 +23,7 @@ Model::Model(string nameModel)
   * \param model is a Model, and the new one gonna be a copy of it
   * \return Model
   */
-Model::Model(Model* model)
+ModelImpl::ModelImpl(ModelImpl* model)
 {
 	flows = model->flows;
 	systems = model->systems;
@@ -30,14 +32,14 @@ Model::Model(Model* model)
 /**
   * \return 
   */
-Model::~Model()
+ModelImpl::~ModelImpl()
 {
 }
 
 /**
   * \return string
   */
-string Model::getName()
+string ModelImpl::getName()
 {
 	return name;
 }
@@ -46,7 +48,7 @@ string Model::getName()
   *\param nameModel is s the name of the Model
   * \return void
   */
-void Model::setName(string nameModel)
+void ModelImpl::setName(string nameModel)
 {
 	name = nameModel;
 }
@@ -54,7 +56,7 @@ void Model::setName(string nameModel)
 /** \param flow is the Flow that gonna be added to the Model
   * \return bool
   **/
-bool Model::add(Flow* flow)
+bool ModelImpl::add(Flow* flow)
 {
 	flows.push_back(flow);
 	return true;
@@ -63,7 +65,7 @@ bool Model::add(Flow* flow)
 /** \param system is the System that gonna be added to the Model
   * \return bool
   **/
-bool Model::add(System* system)
+bool ModelImpl::add(System* system)
 {
 	systems.push_back(system);
 	return true;
@@ -72,7 +74,7 @@ bool Model::add(System* system)
 /** \param flow is the Flow that gonna be removed from Model
   * \return bool
   **/
-bool Model::remove(Flow* flow)
+bool ModelImpl::remove(Flow* flow)
 {
 	int size = flows.size();
 
@@ -91,7 +93,7 @@ bool Model::remove(Flow* flow)
 /** \param system is the System that gonna be removed from Model
   * \return bool
   **/
-bool Model::remove(System* system)
+bool ModelImpl::remove(System* system)
 {
 	int size = systems.size();
 
@@ -113,7 +115,7 @@ bool Model::remove(System* system)
   * \return void
   *
   **/
-void Model::execute(int begin, int end)
+void ModelImpl::execute(int begin, int end)
 {
 	
 	int size = this->flows.size(); // get a vector size
@@ -147,7 +149,7 @@ void Model::execute(int begin, int end)
   * \param model is a Model that gonna be copied
   * \return Model&
   */
-Model& Model::operator= (const Model& model)
+ModelImpl& ModelImpl::operator= (const ModelImpl& model)
 {
 	if (this == &model)
 		return *this;
@@ -183,7 +185,7 @@ Model& Model::operator= (const Model& model)
   * \param model is a Model that gonna be compared with the Model that call this function
   * \return bool
   */
-bool Model::operator== (const Model& model)
+bool ModelImpl::operator== (const ModelImpl& model)
 {
 	if (this == &model)
 		return true;
