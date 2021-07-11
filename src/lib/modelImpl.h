@@ -1,50 +1,56 @@
 #ifndef MODELIMPL_H
 #define MODELIMPL_H
 
-#include "model.h"
-#include "flowImpl.h"
-#include "systemImpl.h"
+#include <iomanip>
+#include <vector>
+#include <iostream>
+#include <string>
 
-class ModelImpl : public Model {
+#include "Flows.h"
+#include "FlowsImpl.h"
+#include "SystemsImpl.h"
+#include "Model.h"
 
-protected:
-	/** Model name */
-	string name;
-	/*!< Model flows */ 
-	vector<Flow*> flows;
-	/*!< Model's systems */
-	vector<System*> systems;
+class ModelImpl : public Model{
+
 
 public:
-	/** Model default constructor */
+/** Model builder */
 	ModelImpl();
-	/** Model constructor */
+/** Model destructor */
+	~ModelImpl();
+/** Model as string type */
 	ModelImpl(string);
-	/** Model destructor */
-	virtual ~ModelImpl();
-	/** Get Model Name */
+/** Model getting the pointer */
+	ModelImpl(ModelImpl*);
+/** Gets the name */
 	string getName();
-	/** Change Model name */
+/** Change the name as a string type */
 	void setName(string);
-	/** Add a Flow to the model */
-	bool add(Flow*);
-	/** Add a System to the model */
-	bool add(System*);
-	/**Remove a Flow from the model */
-	bool remove(Flow*);
-	/**Remove a System from the model */
-	bool remove(System*);
-	/**Run the simulation */
-	void execute(int, int);
+/** Add a System */
+  bool addSystems(Systems*);
+/** Remove a System */
+	bool removeSystems(Systems*);
+/** Add a Flow */
+  bool addFlows(Flows*);
+/** Remove a Flow */
+  bool removeFlows(Flows*);
+/** Increase the value */
+	void increase();
 
 private:
-	/** Model's constructor of copy*/
-	ModelImpl(ModelImpl*);
-	/** operator = overload */
+	/** Gets the adress of the Model as a const and put on the operator */
 	ModelImpl& operator= (const ModelImpl&);
-	/** operator == overload */
 	bool operator== (const ModelImpl&);
-};
 
+
+protected:
+	/** Declares the name as string type */
+	string name;
+	/** Declares the system as a vector */
+	vector<Systems*> systems;
+	/** Declares the flow as a vector */
+	vector<Flows*> flows;
+};
 
 #endif

@@ -1,8 +1,8 @@
-all: 
-	g++ *.cpp *.h ../../src/lib/*.cpp ../../src/lib/*.h -o ../../bin/unitTeste.exe
+all:
+	g++ *.cpp *.h -L../bin -lAPI -o ../../bin/unitTest.exe
 
 clean:
 	rm -f ../../bin/*.o
 
 run:
-	../../bin/unitTeste.exe
+	../../bin/unitTest.exe

@@ -1,5 +1,6 @@
 all:
-	g++ main.cpp ./lib/*.cpp ./lib/*.h -o ../bin/main
+	g++ -shared ./lib/*.cpp -o ../bin/API.dll
+	g++ main.cpp -L../bin -lAPI -Wall -o ../bin/main
 
 clean:
 	rm -f ../bin/*.o

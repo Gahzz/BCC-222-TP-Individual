@@ -1,205 +1,131 @@
-#include "modelImpl.h"
+#include "ModelImpl.h"
+
 
 /**
-  * \return Model
-  */
-ModelImpl::ModelImpl()
-{
-	flows.clear();
-	systems.clear();
-	name = "";
-}
+	* \param Model is the builder
+	* \return Model
+	*/
+ModelImpl::ModelImpl(){}
 
 /**
-  * \param nameModel is the name of the Model
-  * \return Model
-  */
-ModelImpl::ModelImpl(string nameModel)
-{
-	name = nameModel;
-}
+	* \param ~Model is the destructor
+	* \return Model
+	*/
+ModelImpl::~ModelImpl(){}
 
 /**
-  * \param model is a Model, and the new one gonna be a copy of it
-  * \return Model
-  */
+	* \param flows means the flow that is connected with systems, but linked with model
+	* \param systems means the system that is connected with flows, but linked with model
+	* \return Model
+	*/
 ModelImpl::ModelImpl(ModelImpl* model)
 {
-	flows = model->flows;
-	systems = model->systems;
+	flows = model -> flows;
+	systems = model -> systems;
 }
 
 /**
-  * \return 
-  */
-ModelImpl::~ModelImpl()
-{
+	* \param name is the name of the model
+	* \return Model
+	*/
+ModelImpl::ModelImpl(string nameIn){
+  name = nameIn;
 }
 
 /**
-  * \return string
-  */
-string ModelImpl::getName()
-{
-	return name;
+	* \param getName gets the name of the model
+	* \return Model
+	*/
+string ModelImpl::getName(){
+  return name;
 }
 
 /**
-  *\param nameModel is s the name of the Model
-  * \return void
-  */
-void ModelImpl::setName(string nameModel)
-{
-	name = nameModel;
+	* \param setName changes the name of the model
+	* \return void
+	*/
+void ModelImpl::setName(string nameIn){
+  name = nameIn;
 }
 
-/** \param flow is the Flow that gonna be added to the Model
-  * \return bool
-  **/
-bool ModelImpl::add(Flow* flow)
+/**
+	* \param weight see the size of the flow
+	* \param addFlows add the flow
+	* \return void
+	*/
+void ModelImpl::increase(){
+  int weight = flows.size();
+  double* addFlows = new double[weight];
+}
+
+/**
+	* \param addFlows add the flows
+	* \param flows receive a push back
+	* \return true
+	*/
+// FLOW ADD AND REMOVE
+bool ModelImpl::addFlows(Flows* flow)
 {
 	flows.push_back(flow);
 	return true;
 }
 
-/** \param system is the System that gonna be added to the Model
-  * \return bool
-  **/
-bool ModelImpl::add(System* system)
+/**
+	* \param removeFlows removes the flow
+	* \return void
+	*/
+bool ModelImpl::removeFlows(Flows* flow)
+{
+	int weight = flows.size();
+
+	for (int i = 0; i < weight; i++){
+                                   	flows.erase(flows.begin() + i);
+                                    return true;
+                                    if (flows[i]->getName() ==  flow->getName()) {
+                                                                                  flows.erase(flows.begin() + i);
+                                                                                  return true;
+                                                                    }
+
+                                  }
+																	/**
+																		* \param if it doesn't exist, return false
+																		* \return false
+																		*/
+                                  return false;
+}
+
+/**
+	* \param addSystems add a System
+	* \return true
+	*/
+
+// SYSTEM ADD AND REMOVE
+bool ModelImpl::addSystems(Systems* system)
 {
 	systems.push_back(system);
 	return true;
 }
 
-/** \param flow is the Flow that gonna be removed from Model
-  * \return bool
-  **/
-bool ModelImpl::remove(Flow* flow)
-{
-	int size = flows.size();
-
-	for (int i = 0; i < size; i++)
-	{
-		if (flows[i]->getName() == flow->getName())
-		{
-			flows.erase(flows.begin() + i);
-			return true;
-		}
-	}
-
-	return false; // the Flow doesn't exist
-}
-
-/** \param system is the System that gonna be removed from Model
-  * \return bool
-  **/
-bool ModelImpl::remove(System* system)
-{
-	int size = systems.size();
-
-	for (int i = 0; i < size; i++)
-	{
-		if (systems[i]->getName() == system->getName())
-		{
-			systems.erase(systems.begin() + i);
-			return true;
-		}
-	}
-
-	return false; // the System doesn't exist
-}
-
-
-/** \param begin is the begin of the simualtion
-  * \param end is the end of the simulation
-  * \return void
-  *
-  **/
-void ModelImpl::execute(int begin, int end)
-{
-	
-	int size = this->flows.size(); // get a vector size
-	float *v = new float[size]; // alocate a float vector
-
-	for (int i = begin; i < end; i++)
-	{
-		
-		for (int j = 0; j < size; j++)
-			v[j] = flows[j]->execute(); // save the results of executes
-			
-
-		for (int k = 0; k < size; k++)
-		{
-			// set the new systens' value
-			if (flows[k]->getTargetSystem() != NULL)
-				flows[k]->getTargetSystem()->increaseQuantity(v[k]);
-			
-
-			if (flows[k]->getSourceSystem() != NULL)
-				flows[k]->getSourceSystem()->decreaseQuantity(v[k]);
-			
-		}
-	}
-
-	delete [] v;
-
-}
-
 /**
-  * \param model is a Model that gonna be copied
-  * \return Model&
-  */
-ModelImpl& ModelImpl::operator= (const ModelImpl& model)
+	* \param removeSystems removes a System
+	* \return true
+	*/
+bool ModelImpl::removeSystems(Systems* system)
 {
-	if (this == &model)
-		return *this;
+	int weight = systems.size();
 
+  for (int i = 0; i < weight; i++){
+                                   	systems.erase(systems.begin() + i);
+                                    return true;
+                                    if (systems[i]->getName() ==  system->getName()) {
+                                                                                  systems.erase(systems.begin() + i);
+                                                                                  return true;
+                                                                    }
 
-	for (vector<Flow*>::iterator it = flows.begin(); it != this->flows.end(); it++)
-		delete* it;
-
-	flows.clear();
-
-	for (vector<System*>::iterator it = this->systems.begin(); it != this->systems.end(); it++)
-		delete* it;
-
-	this->systems.clear();
-
-
-	for (int i = 0, size = model.flows.size(); i < size; i++)
-	{
-
-		flows.push_back(model.flows[i]);
+                                  }
+																	/**
+																		* \param if it doesn't exist, return false
+																		* \return false
+																		*/
+                                  return false;
 	}
-
-	for (int i = 0, size = model.systems.size(); i < size; i++)
-	{
-		systems.push_back(model.systems[i]);
-	}
-
-	
-	return *this;
-}
-
-/**
-  * \param model is a Model that gonna be compared with the Model that call this function
-  * \return bool
-  */
-bool ModelImpl::operator== (const ModelImpl& model)
-{
-	if (this == &model)
-		return true;
-
-	if (flows.size() != model.flows.size() || systems.size() != model.systems.size())
-		return false;
-
-	for (int i = 0, size = model.flows.size(); i < size; i++)
-		if (!(flows[i] == model.flows[i]))
-			return false;
-
-	for (int i = 0, size = model.systems.size(); i < size; i++)
-		if (!(systems[i] == model.systems[i]))
-			return false;
-
-	return true;
-}

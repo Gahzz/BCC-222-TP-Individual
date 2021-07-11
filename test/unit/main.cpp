@@ -1,16 +1,19 @@
-#include "unit_system.h"
-#include "unit_flow.h"
-#include "unit_model.h"
+#include <iostream>
+#include "UnittestSystem.h"
+#include "UnittestFlow.h"
+#include "UnittestModel.h"
 
-int main() {
+using namespace std;
 
-   	cout << "Start of unit tests !\n";
-	
-	run_unit_tests_System();
-	run_unit_tests_Flow();
-	run_unit_tests_Model();
 
-	cout << "End of unit tests\n";
+int main(){
 
-	return 0;
+  cout << "\nBegin of the Unit Tests";
+
+  UnittestFlow();
+	UnittestSystem();
+	UnittestModel();
+
+
+  return 0;
 }

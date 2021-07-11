@@ -1,33 +1,36 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <vector>
 #include <iomanip>
-#include "flow.h"
+#include <vector>
+#include <iostream>
+#include <string>
 
-/**interface declaration*/
-class Model {
+#include "Flows.h"
+
+
+
+class Model{
+
 
 public:
-	
-    /** Get Model Name */
-	virtual string getName() = 0;
-	/** Change Model name */
-	virtual void setName(string) = 0;
-	/** Add a Flow to the model */
-	/** Model destructor */
-	virtual ~Model() {};
-	/** Add a Flow to the model */
-	virtual bool add(Flow*) = 0;
-	/** Add a System to the model */
-	virtual bool add(System*) = 0;
-	/**Remove a Flow from the model */
-	virtual bool remove(Flow*) = 0;
-	/**Remove a System from the model */
-	virtual bool remove(System*) = 0;
-	/**Run the simulation */
-	virtual void execute(int, int) = 0;
-};
+/** Model destructor */
+	virtual ~Model(){};
+/** Gets the name */
+	string getName();
+/** Change the name as a string type */
+ 	virtual void setName(string) = 0;
+/** Add a System */
+  	virtual bool addSystems(Systems*) = 0;
+/** Remove a System */
+	virtual bool removeSystems(Systems*) = 0;
+/** Add a Flow */
+ 	virtual bool addFlows(Flows*) = 0;
+/** Remove a Flow */
+  	virtual bool removeFlows(Flows*) = 0;
+/** Increase the value */
+	virtual void increase() = 0;
 
+};
 
 #endif
